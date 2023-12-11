@@ -1,72 +1,74 @@
-- !Occupied
-  text: Playstation
-  group: Living
-- !Occupied
-  text: Television
-  group: Living
-- !Occupied
-  text: Doorbel
-  group: Living
-- !Occupied
-  text: Bank
-  group: Living
-- !Occupied
-  text: Dinner table
-  group: Kitchen
-- !Occupied
-  text: Television
-  group: Kitchen
-- !Occupied
-  text: Streamer
-  group: Kitchen
-- !Occupied
-  text: Office 1
-  group: Office
-- !Occupied
-  text: Office 2
-  group: Office
-- !Occupied
-  text: Access Point
-  group: Bedroom
-- !Occupied
-  text: Television
-  group: Bedroom
-- !Occupied
-  text: Access Point
-  group: Attic
-- !Occupied
-  text: Heat pump
-  group: Attic
-- !Occupied
-  text: Solar inverter
-  group: Attic
-- !Occupied
-  text: Access Point
-  group: Internal
-- !Occupied
-  text: Server
-  group: Internal
-- !Occupied
-  text: Zigbee
-  group: Internal
-- !Occupied
-  text: Shed
-  group: Garden
-- !Occupied
-  text: Empty
-  group: Spare
-- !Occupied
-  text: Empty
-  group: Spare
-- !Occupied
-  text: Empty
-  group: Spare
-- !Occupied
-  text: Copper out
-  group: Provider
-- !Occupied
-  text: Fiber out
-  group: Provider
-- !Occupied
-  text: Fiber in
-  group: Provider
+theme: Rounded
+slots:
+  - !Occupied
+    text: Playstation
+    group: Living
+  - !Occupied
+    text: Television
+    group: Living
+  - !Occupied
+    text: Doorbell
+    group: Living
+  - !Occupied
+    text: Bank
+    group: Living
+  - !Occupied
+    text: Dinner table
+    group: Kitchen
+  - !Occupied
+    text: Television
+    group: Kitchen
+  - !Occupied
+    text: Streamer
+    group: Kitchen
+  - !Occupied
+    text: Office 1
+    group: Office
+  - !Occupied
+    text: Office 2
+    group: Office
+  - !Occupied
+    text: Access Point
+    group: Bedroom
+  - !Occupied
+    text: Television
+    group: Bedroom
+  - !Occupied
+    text: Access Point
+    group: Attic
+  - !Occupied
+    text: Heat pump
+    group: Attic
+  - !Occupied
+    text: Solaredge inverter
+    group: Attic
+  - !Occupied
+    text: Access Point
+    group: Internal
+  - !Occupied
+    text: Server
+    group: Internal
+  - !Occupied
+    text: Zigbee
+    group: Internal
+  - !Occupied
+    text: Shed
+    group: Garden
+  - !Occupied
+    text: Wallsocket
+    group: Spare
+  - !Occupied
+    text: Empty
+    group: Spare
+  - !Occupied
+    text: Empty
+    group: Spare
+  - !Occupied
+    text: Copper out
+    group: Provider
+  - !Occupied
+    text: Fiber out
+    group: Provider
+  - !Occupied
+    text: Fiber in
+    group: Provider

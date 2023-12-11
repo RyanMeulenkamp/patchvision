@@ -1,5 +1,12 @@
 use std::cmp::{max, min};
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub(crate) struct Color {
+    pub(crate) red: u8,
+    pub(crate) green: u8,
+    pub(crate) blue: u8,
+}
+
 ///
 /// All of these are theme specific, except for text.
 /// The order determines which one should be drawn in case of overlap.
@@ -10,40 +17,47 @@ use std::cmp::{max, min};
 ///
 /// For overlap of South or North and arrow, specific behavior is implemented.
 ///
-#[derive(Copy, Clone, PartialEq, PartialOrd, Eq, Ord)]
-pub enum PlaceHolder {
+#[derive(Copy, Clone, PartialEq, PartialOrd, Eq, Ord, Debug, Default)]
+pub(crate) enum PlaceHolder {
     /// Empty space
+    #[default]
     None,
 
     /// Padding, which is empty space withing a balloon
     Padding,
 
     /// Arrow sides
-    ArrowLeft, ArrowRight,
+    ArrowLeft,
+    ArrowRight,
 
     /// Balloon sides
-    North, East, South, West,
+    North,
+    East,
+    South,
+    West,
 
     /// Balloon corners
-    NorthEast, SouthEast, SouthWest, NorthWest,
+    NorthEast,
+    SouthEast,
+    SouthWest,
+    NorthWest,
 
-    /// Balloon transitions (betweeen balloon and arrow)
-    TransitionLeft, TransitionRight,
+    /// Balloon transitions (between balloon and arrow)
+    TransitionLeft,
+    TransitionRight,
 
     /// Balloon transition edges (between balloon and arrow)
-    TransitionLeftEdge, TransitionRightEdge,
+    TransitionLeftEdge,
+    TransitionRightEdge,
 
     /// Overlays between arrow and balloon
-    ArrowOverlayNorthLeft, ArrowOverlayNorthRight, ArrowOverlaySouthLeft, ArrowOverlaySouthRight,
+    ArrowOverlayNorthLeft,
+    ArrowOverlayNorthRight,
+    ArrowOverlaySouthLeft,
+    ArrowOverlaySouthRight,
 
     /// Text
-    Text(char),
-}
-
-impl Default for PlaceHolder {
-    fn default() -> Self {
-        PlaceHolder::None
-    }
+    Text(char, Color),
 }
 
 impl PlaceHolder {
@@ -60,8 +74,7 @@ impl PlaceHolder {
             [_, PlaceHolder::None] => *front,
             [PlaceHolder::Padding, _] => *front,
             [_, PlaceHolder::Padding] => *back,
-            _ => *front
+            _ => *front,
         }
     }
-
 }

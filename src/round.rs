@@ -1,4 +1,3 @@
-
 pub(crate) trait Round: Copy {
     fn up(self, multiple: Self) -> Self;
     fn down(self, multiple: Self) -> Self;
@@ -7,7 +6,7 @@ pub(crate) trait Round: Copy {
 impl Round for usize {
     fn up(self, multiple: Self) -> Self {
         if self > 0 {
-            ((self + multiple - 1) / multiple) * multiple
+            self.div_ceil(multiple) * multiple
         } else {
             (self / multiple) * multiple
         }

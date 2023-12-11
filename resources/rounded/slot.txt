@@ -1,0 +1,9 @@
+───<topleft><topright>───
+   <left><right>   
+───<bottomleft><bottomright>───
+        
+   <slotindex>   
+        
+────────
+        
+────────

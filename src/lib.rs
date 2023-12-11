@@ -2,14 +2,13 @@
 #![feature(type_alias_impl_trait)]
 #![feature(impl_trait_in_assoc_type)]
 
-pub(crate) mod round;
 pub(crate) mod balloon;
 pub mod panel;
 pub(crate) mod placeholder;
+pub(crate) mod round;
+pub mod slot;
 pub(crate) mod template;
 pub mod theme;
-pub(crate) mod image;
-pub mod slot;
 
 #[cfg(test)]
 mod tests {

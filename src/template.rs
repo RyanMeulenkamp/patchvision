@@ -2,7 +2,6 @@ use std::cmp::max;
 
 use grid::Grid;
 
-use crate::image::Image;
 use crate::placeholder::PlaceHolder;
 use crate::theme::Theme;
 
@@ -12,20 +11,24 @@ pub struct Template {
 
 impl Default for Template {
     fn default() -> Self {
-            Self::new(Grid::new(1, 1))
+        Self::new(Grid::new(1, 1))
     }
 }
 
 impl Template {
     pub fn new(grid: Grid<PlaceHolder>) -> Self {
-        Template {
-            grid
-        }
+        Template { grid }
     }
 
-    pub fn render(self, theme: Box<dyn Theme>) -> String {
-        let image: Image = (self, theme).into();
-        format!("{}", image)
+    pub fn render(self, theme: &Box<dyn Theme>) -> String {
+        let mut string = String::new();
+        for row in 0..self.grid.rows() {
+            string.push('\n');
+            for placeholder in self.grid.iter_row(row) {
+                string.push_str(&theme.render(*placeholder));
+            }
+        }
+        string
     }
 
     pub(crate) fn overlay(self, another: Template) -> Self {
@@ -55,9 +58,7 @@ impl Template {
             }
         }
 
-        Self {
-            grid: result
-        }
+        Self { grid: result }
     }
 
     pub(crate) fn _overlay_all(all: Vec<Template>) -> Self {
@@ -69,55 +70,72 @@ impl Template {
 
 #[cfg(test)]
 mod tests {
-    use crate::balloon::Balloon;
+    use crate::balloon::{max_shift, Balloon};
+    use crate::placeholder::Color;
     use crate::template::Template;
-    use crate::theme;
+
+    use crate::theme::GenericTheme;
+
+    const COLOR: Color = Color {
+        red: 0,
+        green: 0,
+        blue: 0,
+    };
 
     #[test]
     fn test_render() {
+        let theme = GenericTheme::ASCII.new();
+        let text = "Paarden";
+        for slot in 0..24 {
+            for shift in 0..max_shift(text, slot) {
+                println!(
+                    "{}",
+                    Balloon::new(COLOR, text.into(), slot, 0, shift)
+                        .unwrap()
+                        .pre_render()
+                        .render(&theme)
+                );
+            }
+        }
         println!(
             "{}",
-            Balloon::_right("Paarden".into(), 2, 0)
+            Balloon::new(COLOR, "Ferkels".into(), 4, 1, 1)
                 .unwrap()
                 .pre_render()
-                .render(Box::new(theme::Default {}))
-        );
-        println!(
-            "{}",
-            Balloon::new("Ferkels".into(), 4, 1, 1)
-                .unwrap()
-                .pre_render()
-                .render(Box::new(theme::Default {}))
+                .render(&theme)
         );
     }
 
     #[test]
     fn test_overlay() {
+        let theme = GenericTheme::ASCII.new();
         println!(
             "{}",
             Template::_overlay_all(
                 vec![
-                    Balloon::new("Paarden".into(), 0, 0, 1),
-                    Balloon::new("Ferkels".into(), 2, 1, 3),
-                    Balloon::new("Johans".into(), 3, 2, 2),
-                    Balloon::_right("Bacon is good for me".into(), 4, 0),
-                    Balloon::new("Lorum ipsum jonge".into(), 5, 1, 1),
-                ].into_iter()
-                    .map(|balloon| balloon.unwrap().pre_render())
-                    .collect()
-            ).render(Box::new(theme::Default {})),
+                    Balloon::new(COLOR, "Paarden".into(), 0, 0, 1),
+                    Balloon::new(COLOR, "Ferkels".into(), 2, 1, 3),
+                    Balloon::new(COLOR, "Johans".into(), 3, 2, 2),
+                    Balloon::_right(COLOR, "Bacon is good for me".into(), 4, 0),
+                    Balloon::new(COLOR, "Lorum ipsum jonge".into(), 5, 1, 1),
+                ]
+                .into_iter()
+                .map(|balloon| balloon.unwrap().pre_render())
+                .collect()
+            )
+            .render(&theme),
         );
         println!(
             "{}",
-            Balloon::_right("Gekkenhuis joh hier".into(), 2, 0)
+            Balloon::_right(COLOR, "Gekkenhuis joh hier".into(), 2, 0)
                 .unwrap()
                 .pre_render()
                 .overlay(
-                    Balloon::_right("In petersburg is poardenmarkt".into(), 3, 1)
+                    Balloon::_right(COLOR, "In petersburg is poardenmarkt".into(), 3, 1)
                         .unwrap()
                         .pre_render()
                 )
-                .render(Box::new(theme::Default {}))
+                .render(&theme)
         );
     }
 }

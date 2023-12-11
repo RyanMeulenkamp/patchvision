@@ -1,0 +1,30 @@
+theme: Rounded
+slots:
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Occupied
+    text: Playstation
+    group: Living
+  - !Occupied
+    text: Television
+    group: Living
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
+  - !Free
